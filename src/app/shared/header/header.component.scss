@@ -1,0 +1,95 @@
+.navbar-brand{
+    img{
+        width: 60px;
+    }
+}
+.navbar-stuck{
+    img{
+        width: 50px;
+    }
+}
+.iwrap{
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgb(245, 245, 245);
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.topbar{
+    height: 50px;
+  
+        img{
+            width: 20px;
+        
+    }
+}
+
+
+@media (max-width: 540px) {
+    .navbar-mega-nav{
+    img{
+        width: 100%;
+    }
+    .fs-base{
+        font-size: 14px !important;
+    }
+    .widget-list-item{
+        a{
+            font-size: 10px;
+        }
+    }
+
+}
+}
+
+.searched{
+     padding: 20px 0;
+    background-color: white;
+    width: 40%;
+    position: absolute;
+    border-radius: 5px;
+    border: 1px solid rgb(248, 134, 134);
+    z-index: 1000;
+    margin-top: 50px;
+    
+    ul{
+    list-style: none;
+    }
+}
+.carousel {
+    max-width: 210px;
+    margin: 0 auto; 
+  }
+  
+  .ngb-carousel-inner {
+    max-height: 200px; 
+  }
+  
+
+  .topbar-text {
+    text-align: center;
+  }
+  
+  .right {
+    border-right: none;
+    padding-right: 0;
+}
+.left{
+    border-left: none;
+    padding-left: 2px;
+}
+.test{
+    position: fixed;
+    top: 30px;
+    left: 10px;
+    rotate: 20px;
+    z-index: 100000;
+     transform: rotate(-30deg);
+     p{
+        font-weight: bold;
+        font-size: 16px;
+        color: green;
+     }
+}

@@ -1,0 +1,63 @@
+<app-header></app-header>
+<div class="page-title-overlap bg-dark pt-1">
+  <div class="container d-lg-flex justify-content-between ">
+    <div class="order-lg-2 mb-3 mb-lg-0 ">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+          <li class="breadcrumb-item"><a class="text-nowrap" routerLink="/home"><i class="ci-home"></i>{{'profile.home'
+              | translate}}</a></li>
+          <li class="breadcrumb-item text-nowrap"><a href="" routerLink="/account/profile">{{'profile.account' |
+              translate}}</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+      <h1 class="h3 text-light mb-0">{{'profile.favourites' | translate}}</h1>
+    </div>
+  </div>
+</div>
+<div class="container pb-5 mb-2 mb-md-4 py-5">
+  <div class="row">
+    <section class="">
+   
+      <div class="row">
+        <div class="col-md-3 col-6 px-2 mb-4" *ngFor="let data of favourities; let i = index">
+          <div class="card product-card">
+            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"
+              ngbTooltip="Add to wishlist" (click)="deleteWish(data.book.id)"><i class="fas fa-heart"></i></button><a
+              class="card-img-top d-block overflow-hidden" [routerLink]="['/shop/single',data.book.id]"><img
+                [src]=[data.book.image] alt="Product"></a>
+            <div class="card-body py-2 px-sm-3 px-2">
+              <!-- <a class="product-meta d-block fs-xs pb-1" href="javascript:void(0);">Oyoq kiyimlar va kiyimlar</a> -->
+              <h3 class="product-title fs-sm"><a>{{data.book.title.slice(0,30)}}...</a></h3>
+              <div class="d-flex justify-content-between">
+                <div class="product-price" *ngIf="data.book.price !== null"><span class="text-accent">{{+data.book.promotion_price
+                    |currencyReplace}} <span class="uzs-size">UZS</span> </span>
+                </div>
+               
+                <div class="star-rating">
+                  <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                      <span class="half" [style.width.%]="fill">★</span>☆
+                    </span>
+                  </ng-template>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="d-sm-none">
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="epmty d-flex flex-column align-items-center justify-content-center my-5" *ngIf="favourities.length<=0">
+    <img src="assets/img/empty-wishlist.png" alt="">
+    <p class="my-2">{{'profile.favempty' | translate}}</p>
+    <button class="btn btn-primary" routerLink="/shop/grid-ls">{{'order.order' | translate}}</button>
+  </div>
+</div>
+
+<!-- Footer-->
+<app-footer></app-footer>

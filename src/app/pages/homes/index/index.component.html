@@ -1,0 +1,30 @@
+<app-header></app-header>
+
+<!-- Hero slider-->
+<div class="container my-1">
+<section class="tns-carousel tns-controls-lg">
+  <swiper [config]="Coverflow">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="assets/img/books/slide1.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <!-- Item-->
+        <img src="assets/img/books/slide2.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <!-- Item-->
+        <img src="assets/img/books/slide1.jpg" alt="">
+      </div>
+    </div>
+    <!-- Add Arrows -->
+  <div class="swiper-button-next" ></div>
+  <div class="swiper-button-prev"></div>
+
+    <!-- <div class="swiper-pagination d-flex justify-content-center "></div> -->
+  </swiper>
+</section>
+</div>
+<app-trending></app-trending>
+
+<app-footer></app-footer>

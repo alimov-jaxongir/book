@@ -1,0 +1,164 @@
+<!-- Sign In Modal-->
+<ng-template #toggleFirstModal let-modal>
+
+  <div class="modal-content" >
+    <div class="modal-header bg-secondary">
+      <ul class="nav nav-tabs card-header-tabs" role="tablist" ngbNav #nav="ngbNav">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink class="nav-link fw-medium"><i class="ci-unlocked me-2
+              mt-n1"></i>{{'login.login' | translate}}</a>
+          <ng-template ngbNavContent>
+            <form class="needs-validation tab-pane fade show active" autocomplete="off" [formGroup]="loginForm"
+              (ngSubmit)="loginUser()">
+              <div class="mb-3">
+                <label class="form-label" for="username">{{'login.tel' | translate}}</label>
+                <!-- <span class="input-group-text   right m-0" >+998</span> -->
+                <input class="form-control " type="text" id="username" placeholder="jakhongir" required
+                  formControlName="username" 
+                  [ngClass]="{ 'is-invalid': submitted && loginForm.controls['username'].errors }">
+                <div *ngIf="submitted && loginForm.controls['username'].errors" class="invalid-feedback">
+                  <div *ngIf="loginForm.controls['username'].errors['required']">{{'login.telval' | translate}}
+                    <div *ngIf="loginForm.controls['username'].errors['pattern']">Telefon raqam faqat sonlardan iborat
+                      bo'lishi kerak </div>
+                  </div>
+                  <div
+                    *ngIf="loginForm.controls['username'].errors['minlength'] || loginForm.controls['username'].errors['maxlength']">
+                    {{'login.tellen' | translate}}</div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="si-password">{{'login.password' | translate}}</label>
+                <div class="password-toggle">
+                  <input class="form-control" [type]="loginPassfield ? 'text' : 'password'" id="si-password" required
+                    formControlName="password"
+                    [ngClass]="{ 'is-invalid': submitted && loginForm.controls['password'].errors }">
+                  <label class="password-toggle-btn" aria-label="Show/hide password">
+                    <input class="password-toggle-check" type="checkbox">
+                    <span class="password-toggle-indicator"
+                      [ngClass]="{'mdi-eye-off-outline': !loginPassfield, 'mdi-eye-outline': loginPassfield }"
+                      (click)="toggleloginPassfield()"></span>
+                  </label>
+                  <div *ngIf="submitted && loginForm.controls['password'].errors" class="invalid-feedback">
+                    <div *ngIf="loginForm.controls['password'].errors['required']">{{'login.passval' | translate}}</div>
+                    <div *ngIf="loginForm.controls['password'].errors['minlength']">{{'login.passlen' | translate}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">{{'login.login' |
+                translate}}</button>
+            </form>
+          </ng-template>
+        </li>
+      </ul>
+      <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"
+        (click)="modal.close()"></button>
+    </div>
+    <div class="modal-body tab-content py-4">
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Navbar 3 Level (Light)-->
+<header class="shadow-sm " (window:scroll)="windowScroll()" id="home">
+  <!-- Topbar-->
+  <div class="topbar topbar-dark bg-dark ">
+    <div class="container">
+      <div class="topbar-text text-nowrap text-center  d-flex justify-content-center"><i class="ci-support"></i><span
+          class="text-muted me-1">{{'navbar.contact'|translate}}</span><a class="topbar-link"
+          href="tel:+998994551632">(+998) 99 455 1632</a></div>
+    </div>
+  </div>
+
+  <div class=" bg-light navbar-sticky">
+    <div class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <a class="navbar-brand d-none d-sm-block
+          flex-shrink-0" routerLink="/home"><img src="assets/img/logo-dark.png" width="142" alt="Cartzilla"></a><a
+          class="navbar-brand d-sm-none flex-shrink-0 me-2" routerLink="/home"><img src="assets/img/logo-dark.png"
+            width="50" alt="Cartzilla"></a>
+           <div class=" d-flex flex-column w-50 d-none d-lg-flex">
+            <form [formGroup]="searchForm" >
+              <div class="input-group ">
+                <input class="form-control rounded-end pe-5" formControlName="searchTerm" type="text" placeholder="Qidirish"><i class="ci-search position-absolute top-50 end-0 translate-middle-y
+                  text-muted fs-base me-3"></i>
+                </div>
+                </form> 
+             </div> 
+        <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            (click)="collapse.toggle()"><span class="navbar-toggler-icon"></span></button>
+          <a class="navbar-tool navbar-stuck-toggler" href="javascript:void(0);" (click)="menuShow()"><span
+              class="navbar-tool-tooltip">Expand menu</span>
+            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon
+                ci-menu"></i></div>
+          </a><a class="navbar-tool d-none d-lg-flex" (click)="onWish()"><span
+              class="navbar-tool-tooltip">{{'profile.favourites' | translate}}</span>
+            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon
+                ci-heart"></i></div>
+          </a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="javascript:void(0);" data-bs-toggle="modal">
+            <div class="navbar-tool-text ms-n3 d-flex align-items-center" *ngIf="!user"
+              (click)="toggleModal(toggleFirstModal)">
+              <div class="navbar-tool-icon-box"><i class="navbar-tool-icon
+              ci-user"></i></div><small>{{'login.login' | translate}}</small>
+            </div>
+            <div class="navbar-tool-text ms-n3 d-flex align-items-center" *ngIf="user" routerLink="/account/orders">
+              <div class="navbar-tool-icon-box pointer"><i class="navbar-tool-icon
+              ci-user pointer"></i></div>{{user}}
+            </div>
+          </a>
+          <div class="navbar-tool dropdown ms-3 "><a class="navbar-tool-icon-box
+              bg-secondary dropdown-toggle" (click)="onCart()"><span class="navbar-tool-label pointer">{{cartDatas ?
+                cartDatas.length : 0}}</span><i class="navbar-tool-icon ci-cart pointer"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2
+      pt-0 pb-2">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarCollapse" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+          <!-- Search-->
+          <form [formGroup]="searchForm" >
+          <div class="input-group d-lg-none my-3"><i class="ci-search position-absolute top-50 start-0
+              translate-middle-y text-muted fs-base ms-3"></i>
+            <input class="form-control rounded-start" type="text" placeholder="Qidirish" formControlName="searchTerm">
+          </div>
+        </form>
+          <app-menu></app-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="handheld-toolbar">
+  <div class="d-table table-layout-fixed w-100">
+    <a class="d-table-cell handheld-toolbar-item sidebar-filter d-none" href="javascript:void(0);"
+      data-bs-toggle="offcanvas" data-bs-target="#shop-sidebar" (click)="sidebar()"><span
+        class="handheld-toolbar-icon"><i class="ci-filter-alt"></i></span><span
+        class="handheld-toolbar-label">{{'navbar.filters' | translate}}</span></a>
+    <a class="d-table-cell handheld-toolbar-item" routerLink="/account/wishlist">
+      <span class="handheld-toolbar-icon">
+        <i class="ci-heart"></i>
+      </span>
+      <span class="handheld-toolbar-label">{{'profile.favourites' | translate}}</span>
+    </a>
+    <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse" (click)="collapse.toggle()" onclick="window.scrollTo(0, 0)">
+      <span class="handheld-toolbar-icon">
+        <i class="ci-menu"></i>
+      </span>
+      <span class="handheld-toolbar-label">{{'navbar.menu' | translate}}</span>
+    </a>
+    <a class="d-table-cell handheld-toolbar-item" routerLink="/shop/cart">
+      <span class="handheld-toolbar-icon">
+        <i class="ci-cart"></i>
+        <span class="badge bg-primary rounded-pill ms-1">{{cartDatas ? cartDatas.length : 0}}</span>
+      </span>
+      <span class="handheld-toolbar-label">Savat</span>
+    </a>
+  </div>
+</div>

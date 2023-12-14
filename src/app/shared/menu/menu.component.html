@@ -1,0 +1,29 @@
+<ul class="navbar-nav" id="navbar-nav" *ngIf="role=='admin'">
+  <ng-container *ngFor="let item of menuItems">
+    <li class="nav-item dropdown">
+
+      <a  class="nav-link menu-link sublink dropdown-toggle" data-bs-toggle="dropdown"
+        (click)="onMenuClick($event)" role="button" (click)="toggleItem($event)" [routerLink]="[item.link]" routerLinkActive="router-link-active" >
+        {{item.label | translate}}
+      </a>
+
+      <ul class="dropdown-menu collapse menu-dropdown" *ngIf="item.subItems">
+        <li class="dropdown" *ngFor="let subitem of item.subItems; let i=index;">
+          <a class="dropdown-item side-nav-link-ref sublink childSublink" routerLink="{{subitem.link}}"
+            data-bs-toggle="dropdown" *ngIf="!subitem.subChild">{{subitem.label | translate}}</a>
+
+          <a class="dropdown-item dropdown-toggle sublink" href="javascript:void(0);" data-bs-toggle="dropdown"
+            *ngIf="subitem.subChild" (click)="toggleSubItem($event)">{{subitem.label | translate}}</a>
+
+          <ul class="dropdown-menu collapse menu-dropdown" *ngIf="subitem.subChild">
+            <li *ngFor="let subChild of subitem.subChild;">
+              <a *ngIf="subChild.link" class="dropdown-item sublink" routerLink="{{subChild.link}}">{{subChild.label | translate}}</a>
+              <a *ngIf="subChild.fulllink" class="dropdown-item sublink" href="{{subChild.fulllink}}">{{subChild.label | translate}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+    </li>
+  </ng-container>
+</ul>

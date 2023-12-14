@@ -1,0 +1,71 @@
+<app-header></app-header>
+<div class="page-title-overlap bg-dark pt-1">
+  <div class="container d-lg-flex justify-content-between ">
+    <div class="order-lg-2 mb-3 mb-lg-0 ">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+          <li class="breadcrumb-item"><a class="text-nowrap" routerLink="/home"><i class="ci-home"></i>{{'profile.home'
+              | translate}}</a></li>
+          <li class="breadcrumb-item text-nowrap"><a href="" routerLink="/account/profile">{{'profile.account' |
+              translate}}</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+      <h1 class="h3 text-light mb-0">{{'profile.favourites' | translate}}</h1>
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <div class="row">
+    <section class=" ">
+<div class="container border px-5 py-2">
+  <h3 class="text-center">Kitob qo'shish</h3>
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="px-2">
+    <div class="form-group my-1">
+      <label for="title">Category:</label>
+      <select name="" id="" formControlName="category_id" class="form-select">
+        <option [value]="item.category_id" *ngFor="let item of categories$|async">{{item.name.uz}}</option>
+      </select>
+    </div>
+    <div class="form-group my-1">
+      <label for="title">Title:</label>
+      <input type="text" id="title" class="form-control" formControlName="title" required>
+    </div>
+
+    <div class="form-group my-1">
+      <label for="description">Description:</label>
+      <textarea id="description" class="form-control" formControlName="description"></textarea>
+    </div>
+
+    <div class="form-group my-1">
+      <label for="price">Price:</label>
+      <input type="number" id="price" class="form-control" formControlName="price" required>
+    </div>
+
+    <div class="form-group my-1">
+      <label for="promotion_price">Promotion Price:</label>
+      <input type="number" id="promotion_price" class="form-control" formControlName="promotion_price" required>
+    </div>
+
+    <div class="form-group my-1">
+      <label for="image">Image:</label>
+      <input type="file" id="image" class="form-control" (change)="onFileSelected($event)" />
+    </div>
+
+    <div class="form-group my-1">
+      <label for="rate">Rate:</label>
+      <input type="number" id="rate" class="form-control" formControlName="rate" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary my-1">Add Book</button>
+  </form>
+</div>
+
+    </section>
+  </div>
+</div>
+
+<!-- Footer-->
+<app-footer></app-footer>

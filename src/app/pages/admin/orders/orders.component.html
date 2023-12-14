@@ -1,0 +1,67 @@
+<app-header></app-header>
+
+<div class="page-title-overlap bg-dark pt-4">
+  <div class="container d-lg-flex justify-content-between ">
+    <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+          <li class="breadcrumb-item"><a class="text-nowrap" routerLink="/home"><i class="ci-home"></i>{{'profile.home' | translate}}</a></li>
+        </ol>
+      </nav>
+    </div>
+    <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+      <h1 class="h3 text-light mb-0">{{'order.orders' | translate}}</h1>
+    </div>
+  </div>
+</div>
+<div class="container my-3">
+  <div class="row">
+    <section >
+      <div class="table-responsive fs-md" *ngIf="orders.length>0">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{{'order.image' | translate}}</th>
+              <th>Ismi</th>
+              <th>{{'order.info' | translate}}</th>
+              <th>{{'order.action' | translate}}</th>
+              <th>{{'order.price' | translate}}</th>
+              <th>Soni</th>
+              <th>Vaqti</th>
+              <th>Jarayon</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of orders let i=index">
+              <td class="py-3"><a class="nav-link-style fw-medium fs-sm" href="javascript:void(0);"
+                  data-bs-toggle="modal">{{i+1}}</a></td>
+              <td class="" ><img src={{bookImage(data.book_id)}} alt=""
+                  class="orderImage"></td>
+                  <td class="py-3 text-nowrap" [routerLink]="['/admin/orders/'+data.user_id]"><span>{{userName(data.user_id)}}</span></td>
+              <td class="py-3 text-nowrap"><span>{{bookTitle(data.book_id)}}</span></td>
+              <td class="py-3 text-nowrap">
+                <span *ngIf="data.order_status=='received'" class=" text-danger fw-bold">{{'order.receive' | translate}}</span>
+                <span *ngIf="(data.order_status=='confirmed')"
+                  class=" text-info fw-bold">{{'order.confirm' | translate}}</span>
+              </td>
+              <td class="text-nowrap">{{bookPrice(data.book_id)*data.count|currencyReplace}} <span
+                  class="uzs-size d-inline">UZS</span></td>
+                  <td>{{data.count}}</td>
+              <td>{{data.createdAt | date:'dd/MM/yyyy HH:mm':'Asia/Tashkent'}}</td>
+              <td class="tex-center" *ngIf="data.order_status!=='confirmed'" (click)="confirmed(data.order_id)"><i class="fa fa-check text-success fs-12"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="epmty d-flex flex-column align-items-center justify-content-center my-5" *ngIf="orders.length<=0">
+        <img src="assets/img/icon-empty-cart.png" alt="">
+        <p class="my-2">{{'order.empty' | translate}}</p>
+        <button class="btn btn-primary" routerLink="/shop/grid-ls">{{'order.order' | translate}}</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+<app-footer></app-footer>

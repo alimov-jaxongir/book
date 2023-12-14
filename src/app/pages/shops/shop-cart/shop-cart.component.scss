@@ -1,0 +1,22 @@
+.fas{
+    color: red;
+    font-size: 18px;
+}
+img{
+    width: 80px;
+}
+@media (max-width: 500px) {
+    
+    .product-title{
+        a{
+        font-size: 14px;
+        }
+    }
+    .fs-sm{
+        font-size: 5px;
+    }
+    .text-accent{
+        font-size: 10px;
+    }
+    
+  }

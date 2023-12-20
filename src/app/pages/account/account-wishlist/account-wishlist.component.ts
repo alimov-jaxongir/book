@@ -18,7 +18,7 @@ export class AccountWishlistComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.favourities=JSON.parse(localStorage.getItem("favourites") as string)
+      this.favourities=JSON.parse(localStorage.getItem("favourites") as string) || []
     
   }
 

@@ -30,8 +30,8 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.books=JSON.parse(localStorage.getItem("books") as string)
-    this.orders=JSON.parse(localStorage.getItem("orders") as string)
+    this.books=JSON.parse(localStorage.getItem("books") as string) 
+    this.orders=JSON.parse(localStorage.getItem("orders") as string) || []
     this.http.get<any>('https://dummyjson.com/users').subscribe(val=>{
       this.users=val.users
     })
